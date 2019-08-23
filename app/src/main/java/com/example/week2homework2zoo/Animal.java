@@ -13,15 +13,23 @@ public class Animal implements Parcelable {
     private String avatar;
     private String description;
     private String wiki;
+    private String id;
 
+    public Animal() {
+    }
 
-    public Animal(String name, String category, String diettype, String avatar, String description, String wiki) {
+    //visual assets
+    private int cry = R.raw.beep;
+    private int profilepic = R.drawable.defaultimg;
+
+    public Animal(String name, String category, String diettype, String avatar, String description, String wiki, String id) {
         this.name = name;
         this.category = category;
         this.diettype = diettype;
         this.avatar = avatar;
         this.description = description;
         this.wiki = wiki;
+        this.id = id;
     }
 
     protected Animal(Parcel in) {
@@ -31,6 +39,8 @@ public class Animal implements Parcelable {
         avatar = in.readString();
         description = in.readString();
         wiki = in.readString();
+        cry = in.readInt();
+        profilepic = in.readInt();
     }
 
     public static final Creator<Animal> CREATOR = new Creator<Animal>() {
@@ -47,6 +57,28 @@ public class Animal implements Parcelable {
 
     public String getName() {
         return name;
+    }
+
+    public void setCry(int cry){this.cry = cry;}
+    public int getCry(){return this.cry;}
+
+    public int getprofilepic(){return this.profilepic;}
+    public void setprofilepic(int profilepic){this.profilepic = profilepic;}
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public int getProfilepic() {
+        return profilepic;
+    }
+
+    public void setProfilepic(int profilepic) {
+        this.profilepic = profilepic;
     }
 
     public void setName(String name) {
@@ -106,5 +138,8 @@ public class Animal implements Parcelable {
         parcel.writeString(avatar);
         parcel.writeString(description);
         parcel.writeString(wiki);
+        parcel.writeInt(cry);
+        parcel.writeInt(profilepic);
+        parcel.writeString(id);
     }
 }
